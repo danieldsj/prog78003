@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author daniel
  */
-public class danielAssignment02Test {
+public class DanielAssignment01aTest {
     
-    public danielAssignment02Test() {
+    public DanielAssignment01aTest() {
     }
     
     @BeforeClass
@@ -37,15 +37,15 @@ public class danielAssignment02Test {
     }
 
     /**
-     * Test of main method, of class danielAssignment02.
+     * Test of main method, of class DanielAssignment01a.
      */
     @Test
     public void testMain() {
         System.out.println("main");
         String[] args = null;
-        danielAssignment02.main(args);
+        DanielAssignment01a.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        // ("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
     
 }
