@@ -44,7 +44,7 @@ public class DanielAssignment06 {
         print(myMax(valueOne, valueTwo));
     }
     
-    
+
     public static int myMax(int x, int y) {
         // Returns the maximum of the two ints as an int.
         return Math.max(x, y);
