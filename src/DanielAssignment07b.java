@@ -24,7 +24,7 @@ Requirements:
 
 import java.util.Scanner;
 
-public class DanielAssignment07a {
+public class DanielAssignment07b {
     public static void main(String[] args) {
         
         long cardNumber = getInput();
