@@ -27,9 +27,13 @@ import java.util.Scanner;
 public class DanielAssignment07b {
     public static void main(String[] args) {
         
-        long cardNumber = getInput();
-        generateOutput(cardNumber, isValid(cardNumber));
+        // long cardNumber = getInput();
+        long invalidCardNumber = 4388576018402626L;
+        long validCardNumber = 4388576018410707L;
         
+        generateOutput(validCardNumber, isValid(validCardNumber));
+        generateOutput(invalidCardNumber, isValid(invalidCardNumber));
+                
     }
     
     public static void generateOutput(long cardNumber, boolean valid) {
@@ -49,12 +53,55 @@ public class DanielAssignment07b {
     
     /** Return true if the card number is valid. **/
     public static boolean isValid(long cardNumber) {
-        return true;
+        int evenSum = sumOfDoubleEvenPlace(cardNumber);
+        int oddSum = sumOfOddPlace(cardNumber);
+        int result = evenSum + oddSum;
+        
+        if(result % 10 == 0){
+            return true;
+        }
+       
+        return false;
     }
     
     /** Get the result from step 2. **/
     public static int sumOfDoubleEvenPlace(long cardNumber) {
-        return 0;
+        
+        // The "total" variable will be returned.
+        int total = 0;
+        
+        // Convert the long into a string to be able to use positions.
+        String cardString = String.valueOf(cardNumber);
+        
+        // Iterate over the numbers from right to left.
+        for(int i = cardString.length() - 1; i > -1; i --){
+            
+            // When the position is even.
+            if(i % 2 == 0){
+                
+                // Get the integer value of the character.
+                char valueChar = cardString.charAt(i);
+                String valueString = Character.toString(valueChar);
+                
+                // Multiply by 2 to double the value.
+                int value = Integer.parseInt(valueString) * 2;
+                
+                // If the value is double digit, we need to add each digit.
+                if(value > 9){
+                    
+                    // At the tens value with the ones value.
+                    int newValue = (int)(value / 10) + (value - 10);
+                    total += newValue;
+                    
+                }
+                else{
+                    
+                    // Add value to the total if the value is less than 9.
+                    total += value;
+                }
+            }
+        }
+        return total;
     }
     
     /** getDigit.
@@ -65,12 +112,41 @@ public class DanielAssignment07b {
      @return int - something. 
      **/
     public static int getDigit(int number) {
-        return 0;
+        if(number > 10){
+            return number;
+        }
+        else {
+            return number;
+        }
+        
     }
     
     /** Return the sum of the odd placed digits. **/
-    public static int subOfOddPlace(long number) {
-        return 0;
+    public static int sumOfOddPlace(long cardNumber) {
+        int total = 0;
+        
+        // Convert the long into a string to be able to use positions.
+        String cardString = String.valueOf(cardNumber);
+        
+        // Iterate over the numbers from right to left.
+        for(int i = cardString.length() - 1; i > -1; i --){
+            
+            // If the position is odd.
+            if(i % 2 == 1){
+                
+                // Get the integer value of the character.
+                char valueChar = cardString.charAt(i);
+                String valueString = Character.toString(valueChar);
+                int value = Integer.parseInt(valueString);
+                
+                // Add the value to the total.
+                total += value;
+                
+            }
+            
+        }
+        
+        return total;
     }
     
     /** Return true if the digit d is a prefix for a number. **/
