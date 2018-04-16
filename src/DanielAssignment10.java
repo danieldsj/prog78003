@@ -16,6 +16,13 @@ public class DanielAssignment10 {
     The main function.
     */
     public static void main(String[] args) {
+        
+        /*
+        int[][] testArray = new int[3][3];
+        testArray = {{1,1,1},{0,0,0},{0,0,0}};
+        getWinner(new {{1,1,1},{0,0,0},{0,0,0}})
+        */
+        
         int[][] array = new int[3][3]; // The tic-tac-toe grid.
         int currentPlayer = 1; // Player 1 = X, player 2 = O.
         int winningPlayer = 0; // Sentinal variable for loop if not zero.
@@ -36,6 +43,8 @@ public class DanielAssignment10 {
                 array[selectedRow][selectedCol] = currentPlayer;
                 
                 winningPlayer = getWinner(array);
+                System.out.println("Winning player is " + 
+                        numberToCharacter(winningPlayer) + ".");
                 // Alternate the player numbers.
                 if(currentPlayer == 1){
                        currentPlayer = 2;
@@ -125,7 +134,58 @@ public class DanielAssignment10 {
     }
     
     public static int getWinner(int[][] array){
-        return 0;
+        
+        // Assume no winner.
+        int winner = 0;
+        
+        //check rows
+        for(int row = 0; row < array.length; row++) {           
+            for(int col = 0; col < array[row].length; col++) {
+                if(array[row][0] == array[row][col]){
+                    winner = array[row][0];
+                } else {
+                    winner = 0;
+                    continue;
+                }
+            }
+            if(!(winner == 0)){
+                break;
+            } else {
+                continue;
+            }
+        }
+        
+        // check columns.
+        for(int col = 0; col < array.length; col++) {
+            for(int row = 0; col < array[row].length; col++) {
+                if(array[0][col] == array[row][col]){
+                    winner = array[0][col];
+                } else {
+                    winner = 0;
+                    continue;
+                }
+            }
+            if(!(winner == 0)){
+                break;
+            } else {
+                continue;
+            }
+        }
+        
+        // check upper-left to lower-right.
+        for(int i = 0; i < array.length; i++){
+            if(array[0][0] == array[i][i]){
+                winner = array[0][0];
+            } else {
+                winner = 0;
+                break;
+            }
+        }
+        
+        // check upper-right to lower-left.
+        // TODO
+        
+        return winner;
     }
     
 }
