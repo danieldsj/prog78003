@@ -27,15 +27,34 @@ import java.util.Scanner;
 public class DanielAssignment07b {
     public static void main(String[] args) {
         
-        // long cardNumber = getInput();
-        long invalidCardNumber = 4388576018402626L;
+        long cardNumber = getInput();
+        generateOutput(cardNumber, isValid(cardNumber));
+        
+        /*
+//      long invalidCardNumber = 4388576018402626L;
         long validCardNumber = 4388576018410707L;
         
         generateOutput(validCardNumber, isValid(validCardNumber));
         generateOutput(invalidCardNumber, isValid(invalidCardNumber));
-                
+        */
+        
+        /*
+        System.out.println(getDigit(33));
+        System.out.println(getDigit(2));
+        
+        System.out.println(getSize(1));
+        System.out.println(getSize(11));
+        System.out.println(getSize(111));
+        
+        System.out.println(getPrefix(12345, 3));
+        System.out.println(getPrefix(54321, 2));
+        
+        System.out.println(prefixMatched(1234, 123));
+        System.out.println(prefixMatched(1234, 321));
+        */
     }
     
+    /* Generate the desired output. Do not return any value. */
     public static void generateOutput(long cardNumber, boolean valid) {
         if(valid) {
             System.out.printf("%d is valid\n", cardNumber);
@@ -45,13 +64,15 @@ public class DanielAssignment07b {
         }   
     }
     
+    /* Get the user input and return a long value. */
     public static long getInput() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a credit card number as a long integer: ");
         return input.nextLong();
     }
     
-    /** Return true if the card number is valid. **/
+    /* Given a long value, return true is the value is a valid credit card 
+    number */
     public static boolean isValid(long cardNumber) {
         int evenSum = sumOfDoubleEvenPlace(cardNumber);
         int oddSum = sumOfOddPlace(cardNumber);
@@ -64,9 +85,11 @@ public class DanielAssignment07b {
         return false;
     }
     
-    /** Get the result from step 2. **/
+    /* Given a long number, return the sum of the doubled even placed numbers 
+    from right to left. If the doubled number has two digits, use the sum of the
+    digits. */
     public static int sumOfDoubleEvenPlace(long cardNumber) {
-        
+                
         // The "total" variable will be returned.
         int total = 0;
         
@@ -86,34 +109,18 @@ public class DanielAssignment07b {
                 // Multiply by 2 to double the value.
                 int value = Integer.parseInt(valueString) * 2;
                 
-                // If the value is double digit, we need to add each digit.
-                if(value > 9){
-                    
-                    // At the tens value with the ones value.
-                    int newValue = (int)(value / 10) + (value - 10);
-                    total += newValue;
-                    
-                }
-                else{
-                    
-                    // Add value to the total if the value is less than 9.
-                    total += value;
-                }
+                // Use the getDigit function to get the sum of the digits.
+                total += getDigit(value);
             }
         }
         return total;
     }
     
-    /** getDigit.
-     * Return this number if it is a single digit, otherwise return the sum of 
-     * the two digits. 
-     
-     @param number - something.
-     @return int - something. 
-     **/
+    /* Given an int number, return this number if it is a single digit, 
+    otherwise return the sum of the two digits. */
     public static int getDigit(int number) {
-        if(number > 10){
-            return number;
+        if(number > 9){
+            return ((int)(number/10) % 10) + ((int)(number % 10));
         }
         else {
             return number;
@@ -121,7 +128,8 @@ public class DanielAssignment07b {
         
     }
     
-    /** Return the sum of the odd placed digits. **/
+    /* Given a long, return the sum of the odd placed digits from right to 
+    left. */
     public static int sumOfOddPlace(long cardNumber) {
         int total = 0;
         
@@ -149,20 +157,40 @@ public class DanielAssignment07b {
         return total;
     }
     
-    /** Return true if the digit d is a prefix for a number. **/
+    /* Given a long and an int, return true if the int is a prefix for the 
+    long. */
     public static boolean prefixMatched(long cardNumber, int d) {
-        return true;
+        
+        int prefixSize = getSize(d);
+        long prefixValue = getPrefix(cardNumber, prefixSize);
+        
+        if(prefixValue == d){
+            return true;
+        } else {
+            return false;
+        }
     }
     
-    /** Return the number of digits in d. **/
+    /* Given an int, return the number of digits. */
     public static int getSize(int d) {
-        return 0;
+        int value = d;
+        int digits = 0;
+        
+        while(value > 0){
+            value = value / 10;
+            digits++;
+        }
+        
+        return digits;
     }
     
-    /** Return the first k number of digits from number. If the number of 
-     * digits in number is less than k, return number. */
+    /* Given a long and int, return the first int numbers of digits from the 
+    long.*/
     public static long getPrefix(long cardNumber, int k) {
-        return 0;
+        double size = getSize((int)cardNumber);
+        double digits = (double)cardNumber / 
+                Math.pow(10.0, (double)getSize((int)cardNumber) - k);
+       
+        return (long)digits;
     }
-    
 }
