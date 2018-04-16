@@ -41,7 +41,10 @@ public class DanielAssignment08 {
             startingNumber = input.nextInt();
         } while((startingNumber % 2) == 1);
         
+        // Produce a filled array.
         int[] array = arrayFill(arraySize, startingNumber);
+        
+        // Generate output.
         generateOutput(array);
         
     }
